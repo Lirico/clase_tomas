@@ -4,21 +4,19 @@
 // y devuelva la suma de todos sus elementos.
 function sumaArreglo(arr) {
 
-    if(arr === ''){
+    if(arr.length === 0){
         return 0        // si el arreglo esta vacio, retorna 0
     }
 
-    /* return arr[0] + sumaArreglo(arr.slice(1)) */   // obtengo el primer elemento y lo sumo con los demas
+    return arr[0] + sumaArreglo(arr.slice(1))  // obtengo el primer elemento y lo sumo con los demas
 
 }
-
-console.log(sumaArreglo([]))
 
 // Ejercicio 2 - Escribe una función recursiva que determine si un elemento 
 // específico existe dentro de un arreglo.
 function buscarElemento(arr, elemento) {
 
-    if(arr === ''){
+    if(arr.length === 0){
         return false    // Si el arreglo esta vacio, retorna false
     }
 
@@ -26,26 +24,29 @@ function buscarElemento(arr, elemento) {
         return true                          // si el elemento es igual al primer elemento del arreglo devuelve true
     }
 
-    return buscarElemento(arr.slice(0))      // si no es igual al primer elemento del arreglo lo sacamos y seguimos con el siguiente elemento
+    return buscarElemento(arr.slice(1), elemento)      // si no es igual al primer elemento del arreglo lo sacamos y seguimos con el siguiente elemento
 
 }
 
-console.log(buscarElemento())
 
 // Ejercicio 3 - Escribe una función recursiva que encuentre el número más grande en un arreglo de números.
 function encontrarMaximo(arr) {
 
-    if(arr === ''){
-        return 0
+    if (arr.length === 1) {
+        return arr[0]
     }
 
-    /* if(arr[0] > arr.slice(1)){
-        return arr
-    } */
-
-    return arr[0] > encontrarMaximo(arr.slice(1))
-
+    return arr[0] > encontrarMaximo(arr.slice(1)) 
+        ? arr[0] 
+        : encontrarMaximo(arr.slice(1))
 }
+// [4]
+// arr[0] > encontrarMaximo(arr.slice(1)) ? arr[0] : encontrarMaximo(arr.slice(1))
+// 3 > encontrarMaximo(arr.slice(1)) ? 3 : encontrarMaximo(arr.slice(1))
+// 3 > 2 ? 3 : encontrarMaximo(arr.slice(1))
+// 3 > 1 ? 3 : encontrarMaximo(arr.slice(1))
+// 3 > 4 ? 3 : encontrarMaximo(arr.slice(1))
+// 4
 
 console.log(encontrarMaximo([23,42,12]))
 
@@ -78,3 +79,4 @@ const chau = saludar('chau')
 
 console.log(hola('Pedro'))
 console.log(chau('Pedro'))
+
