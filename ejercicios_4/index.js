@@ -5,25 +5,76 @@
 // (se lee igual de izquierda a derecha que de derecha a izquierda).
 function esPalindromo(cadena) {
 
+    if(cadena === ''){
+        return ''
+    }
+
+    let cad = esPalindromo(cadena.slice(1)) + cadena[0]
+
+    if(cad === cadena){
+        return `La palabra ${cadena} es un plíndromo`
+    }
+
+    
+    return cadena         // ['somos'] = ['somos'] 
 }
+
+console.log(esPalindromo('somos'))
 
 // Ejercicio 2 - Escribe una función recursiva que cuente cuántas vocales hay en una cadena.
 function contarVocales(cadena) {
+    if(cadena === ''){
+        return 0
+    }
+
+    let vocales = ['a','e','i','o','u']
+
+    if(vocales.includes(cadena[0])){
+        return 1 + contarVocales(cadena.slice(1))
+    }
+
+    return contarVocales(cadena.slice(1))
 
 }
+
+console.log(contarVocales('como estas'))
 
 /*********** CLOSURES  ***********/
 // Ejercicio 1 - Crea una función que permita agregar frases a un banco y luego obtener todas 
 // las frases almacenadas.
 function createPhraseBank() {
+    let frases = []
 
+    return function(frase){
+        if (frase){
+            frases.push(frase)
+        } else {
+            return frases
+        }
+    }
 }
+
+const banco = createPhraseBank()
+
+banco('Hola')
+banco('chau')
+
+console.log(banco())
 
 // Ejercicio 2 - Crea una función que permita generar usuarios con contraseñas y verificar si 
 // la contraseña ingresada es correcta.
 function createUser(username, password) {
 
+    return function(ingresar){
+        return password === ingresar
+    }
 }
+
+const usuario = createUser('Tomas', '12345')
+
+console.log(usuario('Tomas'))
+console.log(usuario('12345'))
+
 
 /*********** FUNCIONES DE ORDEN SUPERIOR  ***********/
 // Ejercicio 1 - Crea una función aplicarDescuento que reciba una lista de precios y una función 
