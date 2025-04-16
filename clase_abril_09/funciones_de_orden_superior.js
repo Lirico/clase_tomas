@@ -55,5 +55,19 @@ const frutas = ["Mora", "Manzana", "Tomate", "Pera"]
 // console.log(sonIguales.some(num => num === otroNum))
 
 
+function filter(arreglo, condicion){
+    const nuevoArreglo = []
 
+    for (const elemento of arreglo) {
+        if(condicion(elemento)){
+            nuevoArreglo.push(elemento)
+        }
+    }
 
+    return nuevoArreglo
+}
+
+// console.log(filter(frutas, elemento => elemento.length === 4 ))
+// console.log(filter(frutas, elemento => elemento.length > 4 ))
+
+frutas.filter(fruta => fruta.length === 4)
