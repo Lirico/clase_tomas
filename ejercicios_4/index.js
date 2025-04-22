@@ -80,9 +80,23 @@ console.log(usuario('12345'))
 // Ejercicio 1 - Crea una función aplicarDescuento que reciba una lista de precios y una función 
 // que calcule el descuento. La función de descuento debe recibir un precio y devolver el precio 
 // con el descuento aplicado.
+function aplicarDescuento(listaPrecios){
+
+}
+
+function calcularDescuento(){
+
+}
 
 
 // Ejercicio 2 - Crear una replica de la funcionalidad del metodo "find" como funcion independiente.
 function find(arreglo, condicion){
 
+    for (let i = 0; i < arreglo.length; i++) {
+        
+        if (condicion(arreglo[i])) {
+            return arreglo[i];
+        }
+    }
+    return undefined;
 }
