@@ -13,21 +13,21 @@ function contarMayores(arr, valor) {
     return contarMayores(arr.slice(1), valor) //valor
 }
 
-console.log(contarMayores([5, 8, 3, 10, 11], 6))
-console.log('--------------------------------------------------------------------------')
+// console.log(contarMayores([5, 8, 3, 10, 11], 6))
+// console.log('--------------------------------------------------------------------------')
 
 // Ejercicio 2 (Recursion) 
-// Calcular la suma de los números impares hasta n
-function sumaImpares(n) {
+// Calcular la total de los números impares hasta n
+function totalImpares(n) {
     if (n <= 0) {
         return 0; // si n es 0 o menor que 0, termina la recursion
     }
 
     if(n % 2 !== 0){
-        return n + sumaImpares(n - 2)  // 13 / 11 / 9 / 7 / 5 / 3 / 1 = 49
+        return n + totalImpares(n - 2)  // 13 / 11 / 9 / 7 / 5 / 3 / 1 = 49
     }
 
-    return sumaImpares(n - 1)
+    return totalImpares(n - 1)
 
 
     /* for (let i = 1; i <= n; i += 2) {
@@ -36,45 +36,60 @@ function sumaImpares(n) {
 
 }
 
-console.log(sumaImpares(13)) // 1 - 3 - 5 - 7 - 9 - 11 - 13 = 49
-console.log('--------------------------------------------------------------------------')
+// console.log(totalImpares(13)) // 1 - 3 - 5 - 7 - 9 - 11 - 13 = 49
+// console.log('--------------------------------------------------------------------------')
 
 
 // Ejercicio 3 (Funciones de orden superior)
 // Crea una función llamada ordenarPor que reciba un arreglo y una función de comparación, y devuelva el arreglo ordenado según esa función.
-function ordenarPor(arreglo, fnComparacion) {
-    return fnComparacion()
+function compareFnMenorAMayor(a, b){
+    return a - b
 }
 
-/* function fnComparacion(arreglo){
-    return arreglo
-} */
+function ordenarPor(arreglo, fnComparacion) {
+    return arreglo.sort(fnComparacion)
+}
 
-console.log(ordenarPor([4, 1, 7, 2], ))
 
 // Ejercicio 4 (Funciones de orden superior)
 // Crea una función llamada crearFiltro que reciba un valor limite y devuelva una función que reciba 
 // un número y devuelva true si el número es mayor que el limite, o false en caso contrario. Luego, 
 // usa esta función para filtrar un arreglo de números.
-function crearFiltro(limite) {
+function limite(limite) {
     return function(n){
-        if(n > limite){
-            return true
-        }
-        else{
-            return false
-        }
+        return n > limite
     }
 }
+
+function filter(arreglo, condicion){
+    const filtrados = []
+
+    for (const elemento of arreglo) {
+        if(condicion(elemento)){
+            filtrados.push(elemento)
+        }
+    }
+
+    return filtrados
+}
+
+const condicion = limite(8)
+
+// console.log(filter([1,5,8,10,3,7], condicion))
+
 
 // Ejercicio 5 (Funciones de orden superior)
 // Crea una función llamada transformar que reciba un arreglo y una función fn, y devuelva un nuevo 
 // arreglo con los elementos transformados aplicando fn a cada uno.
+
+
 function transformar(arreglo, fn) {
     return arreglo.map(fn)          //cada elemento del arreglo se le aplica fn
 }
 
-console.log(transformar([1, 2, 3], )) //n * 2
+transformar([1, 2, 3], (n) => n * 2)
+
+
 
 
 // Ejercicio 6 (Clases)
@@ -133,8 +148,68 @@ class Gerente extends Empleado{
     aumentarSalario(porcentaje){
         let aumento = salario * (porcentaje / 100) // multiplica el salario por el porcentaje convertido a decimal
 
-        let suma = salario + aumento 
+        let total = salario + aumento 
 
-        return suma
+        return total
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************* EJEMPLOS **************/
+// function map(arreglo, fn){
+//     const newArr = []
+
+//     for (elemento of arreglo) {
+//         newArr.push(fn(elemento))
+//     }
+
+//     return newArr
+// }
+
+// console.log(map([1,2,3], (n) => n * 2))
+// console.log(map([1,2,3], (n) => n ** 2))
+
+// Array.prototype.map2 = function(fn) {
+//     const newArr = []
+
+//     for (elemento of this) {
+//         newArr.push(fn(elemento))
+//     }
+
+//     return newArr
+// }
+
+// const arr = [1,2,3]
+
+// console.log(arr.map2((num) => num * 2))
