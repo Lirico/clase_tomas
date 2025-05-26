@@ -5,6 +5,11 @@ function contarDigito(numero, digito) {
         return 0
     }
 
+
+    // const newArray = numero += []
+
+    // const suma = newArray[0].includes(digito) ? 1 : 0
+
     const newArray = numero += []
 
     if (newArray[0].includes(digito)) {
@@ -12,9 +17,10 @@ function contarDigito(numero, digito) {
     }
 
     return contarDigito(numero.slice(1), digito)
+
+    // return suma + contarDigito(numero.slice(1), digito)
 }
 
-console.log(contarDigito(4314141141, 4))
 
 // Ejercicio 2 (Funciones de Orden Superior) - Crea una función llamada crearMultiplicador
 // que reciba un número n y devuelva una nueva función que reciba otro número y lo multiplique por n.
@@ -29,19 +35,23 @@ function crearMultiplicador(n) {
 // y una función de condición, y devuelva cuántos elementos del arreglo cumplen esa condición.
 function contarSi(arreglo, fnCondicion) {
     let contador = 0
-    for(i = 0; i < arreglo.length; i++){
-        
+    for (const elemento of arreglo) {
+        if(fnCondicion(elemento)){
+          contador++
+        }
     }
-    return fnCondicion(arreglo)
-}
 
-function par(arreglo){
-    return arreglo % 2 === 0
+    return contador
+} 
 
-}
+// console.log(contarSi([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], (elemento) => elemento % 2 === 0 ))
+// console.log(contarSi([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], (elemento) => elemento > 3 ))
 
-
-console.log(contarSi([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], par))
+// function contarSi(arreglo, fnCondicion){
+//   return arreglo.reduce((contador, elemento) => {
+//     return fnCondicion(elemento) ? contador + 1 : contador
+//   }, 0)
+// }
 
 // Ejercicio 4 (Funciones de Orden Superior) - Crea una función llamada aplicarFunciones que reciba un
 // arreglo de funciones y un valor inicial, y aplique cada función al resultado acumulado, devolviendo
@@ -51,6 +61,9 @@ const funciones = [suma, resta, multi]
 
 function aplicarFunciones(funciones, valorInicial) {
     let resultado = valorInicial
+    // for (const elemento of funciones){
+    //    resultado = funciones[elemento](resultado)
+    // }
     for(let i = 0; i < funciones.length; i++){
         resultado = funciones[i](resultado) //llama a la funcion en la posicion de i y aplica el resultado actual
     }
@@ -69,7 +82,11 @@ function multi(n){
     return n * 10
 }
 
-console.log(aplicarFunciones(funciones, 5))
+// function aplicarFunciones(functiones, valorInicial){
+//   return functiones.reduce((resultado, fn) => fn(resultado), valorInicial )
+// }
+
+// console.log(aplicarFunciones(funciones, 5))
 
 // Ejercicio 5 (Clases)
 /*
@@ -92,6 +109,26 @@ console.log(aplicarFunciones(funciones, 5))
         - info(): retorna una cadena con el nombre, cantidad de alumnos y lista de carreras.
 */
 
+class Universidad{
+    constructor(nombre, cantidadAlumnos, carreras){
+        this.nombre = nombre
+        this.cantidadAlumnos = cantidadAlumnos
+        this.carreras = carreras
+    }
+
+    dameNombre(){
+        return this.nombre
+    }
+
+    info(){
+        return `Nombre: ${this.nombre}, Cantidad de Alumnos: ${this.cantidadAlumnos}, Carreras: ${this.carreras}`
+    }
+    
+}
+
+const harvard = new Universidad('Harvard', 20000, ['Derecho', 'Economia', 'Ciencias Politicas'])
+// console.log(harvard.info())
+
 // Ejercicio 6 (Clases)
 /* 
     Implementar la clase "Propiedad" que modela un inmueble, con una estructura definida por los siguientes 
@@ -113,7 +150,7 @@ console.log(aplicarFunciones(funciones, 5))
         - mismaCalle(): Operación que recibe dos propiedades y retorna true si estan en la misma calle y false 
         en caso contrario.
         - mayorNumeración(): Operación que recibe dos propiedades y si están en la misma calle de la misma 
-        localidad, retorna la propiedad que posee mayor numeración. Si están calles o en localidades diferentes debe lanzar una excepción.
+        localidad, retorna la propiedad que posee mayor numeración. Si están calles o en localidades diferentes debe lanzar un error.
         - calculaImpuestoARBA(): Operación que retorna el porcentaje de impuesto inmobiliario de una propiedad, 
         según la siguiente regla:
             - Propiedades entre 1871 y 1949:
@@ -126,26 +163,6 @@ console.log(aplicarFunciones(funciones, 5))
         - info(): Debe devolver una cadena de texto con la calle, el numero y la localidad.
 */
 
-class Universidad{
-    constructor(nombre, cantidadAlumnos, carreras){
-        this.nombre = nombre
-        this.cantidadAlumnos = cantidadAlumnos
-        this.carreras = carreras
-    }
-
-    dameNombre(){
-        return this.nombre
-    }
-
-    info(){
-        return `Nombre: ${this.nombre}, Cantidad de Alumnos: ${this.cantidadAlumnos}, Carreras: ${this.carreras}`
-    }
-    
-}
-
-const harvard = new Universidad('Harvard', 20000, ['Derecho', 'Economia', 'Ciencias Politicas'])
-console.log(harvard.info())
-
 class Propiedad{
     constructor(calle, numero, localidad, añoDeConstruccion, cantidadDeAmbientes){
         this.calle = calle
@@ -155,16 +172,19 @@ class Propiedad{
         this.cantidadDeAmbientes = cantidadDeAmbientes
     }
 
-    mismaLocalidad(){
-
+    mismaLocalidad(localidad1, localidad2){
+      return localidad1 === localidad2
     }
 
-    mismaCalle(){
-
+    mismaCalle(propiedad1, propiedad2){
+      return propiedad1.calle === propiedad2.calle
     }
 
-    mayorNumeración(){
-
+    mayorNumeración(propiedad1, propiedad2){
+      if(propiedad1.calle !== propiedad2.calle || propiedad1.localidad !== propiedad2.localidad){
+        return "Pone bien los datos boludito!"
+      }
+      return propiedad1.numero > propiedad2.numero ? propiedad1 : propiedad2
     }
 
     calculaImpuestoARBA(){
@@ -194,4 +214,8 @@ class Propiedad{
     }
 }
 
-const propiedad = new Propiedad()
+// const propiedad1 = new Propiedad("Siempreviva", 123, "hurlingham", 1912, 2)
+// const propiedad2 = new Propiedad("Falopa", 54, "moron", 1925, 3)
+// const propiedad3 = new Propiedad("Falopa", 45, "moron", 1260, 1)
+
+// console.log(propiedad1.mayorNumeración(propiedad2, propiedad3))
