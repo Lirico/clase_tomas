@@ -1,18 +1,24 @@
 // Ejercicio 1 (Recursion) - Escribe una función recursiva que invierta el orden de los elementos de un arreglo.
-function invertirArreglo(arr){
-    // Tu codigo
+function invertirArreglo(arr) {
+    if (arr.length == 0) {
+        return ''
+    }
+
+    return invertirArreglo(arr[0]) + []
 }
+
+console.log(invertirArreglo([1, 2, 3, 4, 5]))
 
 // Ejercicio 2 (Funciones de orden superior) - Crea una función llamada negar que reciba una función de condición y devuelva 
 // una nueva función que invierta el resultado de la condición (si devuelve true, ahora devuelve false y viceversa).
-function negar(fnCondicion){
+function negar(fnCondicion) {
     // Tu codigo
 }
 
 // Ejercicio 3 (Funciones de orden superior) - Crea una función llamada ejecutarConRetraso que reciba una función fn y un 
 //  en milisegundos, y devuelva una nueva función que, al ser llamada, ejecute fn después del tiempo indicado.
 // Pista: Investigar con que funcion de JS se puede realizar una ejecucion con retraso.
-function ejecutarConRetraso(fn, milisegundos){
+function ejecutarConRetraso(fn, milisegundos) {
     // Tu codigo
 }
 
@@ -29,6 +35,22 @@ function ejecutarConRetraso(fn, milisegundos){
 
     Nota: Una variable de tipo tiempo seria una instancia de la clase tiempo.
 */
+
+class Tiempo {
+    constructor(horas, minutos, segundos) {
+        this.horas = horas
+        this.minutos = minutos
+        this.segundos = segundos
+    }
+
+    tiempoASegundos() {
+        return this.horas * 3600 + this.minutos * 60 + this.segundos
+    }
+
+    tiemposDesdeSegundos(segundos) {
+        const horas, minutos, segundos = 
+    }
+}
 
 // Ejercicio 5 (Clases)
 /* 
@@ -66,3 +88,40 @@ function ejecutarConRetraso(fn, milisegundos){
 
     Perímetro(Cuadrado) = 4 * lado
 */
+
+class Rectangulo {
+    constructor(lado1, lado2) {
+        this.lado1 = lado1
+        this.lado2 = lado2
+    }
+
+    area() {
+        return this.lado1 * this.lado2
+    }
+
+    perimetro() {
+        return 2 * this.lado1 + 2 * this.lado2
+    }
+
+    info() {
+        return `Lado 1: ${this.lado1}, Lado 2: ${this.lado2}`
+    }
+}
+
+class Cuadrado {
+    constructor(lado) {
+        this.lado = lado
+    }
+
+    area() {
+        return this.lado^2
+    }
+
+    perimetro() {
+        return 4 * this.lado
+    }
+
+    info() {
+        return `Lado: ${this.lado}`
+    }
+}
