@@ -1,26 +1,50 @@
 // Ejercicio 1 (Recursion) - Escribe una función recursiva que invierta el orden de los elementos de un arreglo.
-function invertirArreglo(arr) {
+/* function invertirArreglo(arr) {
     if (arr.length == 0) {
         return ''
     }
 
     return invertirArreglo(arr[0]) + []
-}
+} */
 
-console.log(invertirArreglo([1, 2, 3, 4, 5]))
+//console.log(invertirArreglo([1, 2, 3, 4, 5]))
 
 // Ejercicio 2 (Funciones de orden superior) - Crea una función llamada negar que reciba una función de condición y devuelva 
 // una nueva función que invierta el resultado de la condición (si devuelve true, ahora devuelve false y viceversa).
 function negar(fnCondicion) {
-    // Tu codigo
+    return function (valor) {
+        return !fnCondicion(valor)
+    }
 }
+
+function mayorQueDiez(n) {
+    return n > 10
+}
+
+const noEsMayorQueDiez = negar(mayorQueDiez)
+
+console.log(mayorQueDiez(10))
+console.log(noEsMayorQueDiez(4))
+console.log(mayorQueDiez(5))
+console.log(noEsMayorQueDiez(21))
+
 
 // Ejercicio 3 (Funciones de orden superior) - Crea una función llamada ejecutarConRetraso que reciba una función fn y un 
 //  en milisegundos, y devuelva una nueva función que, al ser llamada, ejecute fn después del tiempo indicado.
 // Pista: Investigar con que funcion de JS se puede realizar una ejecucion con retraso.
 function ejecutarConRetraso(fn, milisegundos) {
-    // Tu codigo
+    return function () {
+        setTimeout(fn, milisegundos)
+    }
 }
+
+function suma(n, n2){
+    return n + n2
+}
+
+const ejecutar = ejecutarConRetraso(() => console.log(suma(10, 10)), 2000)
+
+console.log(ejecutar())
 
 // Ejercicio 4 (Clases)
 /* 
@@ -48,7 +72,15 @@ class Tiempo {
     }
 
     tiemposDesdeSegundos(segundos) {
-        const horas, minutos, segundos = 
+        return this.horas, this.minutos, this.segundos
+    }
+
+    mayorDuracion(horas, minutos){
+        
+    }
+
+    info(){
+        return `${this.horas}:${this.minutos}:${this.segundos}`
     }
 }
 
@@ -64,6 +96,25 @@ class Tiempo {
     Finalizar: Debe recibir las hs,min y seg finales.
     TiempoEmpleado: Devuelve una variable de tipo Tiempo con la diferencia entre el tiempo inicial y el final.
 */
+
+class Cronometro {
+    constructor(tiempoInicial, tiempoFinal){
+        this.tiempoInicial = tiempoInicial
+        this.tiempoFinal = tiempoFinal
+    }
+
+    comenzar(){
+
+    }
+
+    finalizar(){
+
+    }
+
+    tiempoEmpleado(){
+        
+    }
+}
 
 // Ejercicio 6 (Clases)
 /* 
@@ -114,7 +165,7 @@ class Cuadrado {
     }
 
     area() {
-        return this.lado^2
+        return this.lado ^ 2
     }
 
     perimetro() {
