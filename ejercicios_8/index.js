@@ -1,13 +1,38 @@
 // Ejercicio 1 (Recursion) - Escribe una función recursiva que invierta el orden de los elementos de un arreglo.
-function invertirArreglo(arr) {
-    if (arr.length == 0) {
-        return ''
-    }
+// function invertirArreglo(arr) {
+//     if (arr.length == 0) {
+//         return []
+//     }
 
-    return invertirArreglo(arr[0]) + []
-}
+//     const ultimoElemento = arr[arr.length - 1] // 5
 
-console.log(invertirArreglo([1, 2, 3, 4, 5]))
+//     return [ultimoElemento, ...invertirArreglo(arr.slice(0, -1))] // [5, [1,2,3,4]]
+// }
+
+// function invertirArreglo(arr) {
+//     if (arr.length == 0) {
+//         return []
+//     }
+
+//     const ultimoElemento = arr[arr.length - 1] 
+
+//     const restoInvertido = invertirArreglo(arr.slice(0, -1)) 
+
+//     restoInvertido.unshift(ultimoElemento)
+
+
+//     return restoInvertido
+// }
+
+
+// invertirArreglo([1, 2, 3, 4, 5])
+
+// [1,2,3,4,5]
+// [5,1,2,3,4]
+// [5,4,1,2,3]
+// [5,4,3,1,2]
+// [5,4,3,2,1]
+
 
 // Ejercicio 2 (Funciones de orden superior) - Crea una función llamada negar que reciba una función de condición y devuelva 
 // una nueva función que invierta el resultado de la condición (si devuelve true, ahora devuelve false y viceversa).
@@ -47,9 +72,9 @@ class Tiempo {
         return this.horas * 3600 + this.minutos * 60 + this.segundos
     }
 
-    tiemposDesdeSegundos(segundos) {
-        const horas, minutos, segundos = 
-    }
+    // tiemposDesdeSegundos(segundos) {
+    //     const horas, minutos, segundos = 
+    // }
 }
 
 // Ejercicio 5 (Clases)
@@ -110,18 +135,20 @@ class Rectangulo {
 
 class Cuadrado {
     constructor(lado) {
-        this.lado = lado
+        this.rectangulo = new Rectangulo(lado, lado)
     }
 
     area() {
-        return this.lado^2
+        return this.rectangulo.area()
     }
 
     perimetro() {
-        return 4 * this.lado
+        return this.rectangulo.perimetro()
     }
 
     info() {
         return `Lado: ${this.lado}`
     }
 }
+
+const cuadrado = new Cuadrado(2)
