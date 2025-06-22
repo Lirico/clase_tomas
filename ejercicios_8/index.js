@@ -39,9 +39,9 @@
 // una nueva función que invierta el resultado de la condición (si devuelve true, ahora devuelve false y viceversa).
 function negar(fnCondicion) {
     return function (valor) {
-        return !fnCondicion(valor)
+        return !fnCondicion(valor) 
     }
-}
+}   
 
 function mayorQueDiez(n) {
     return n > 10
@@ -49,10 +49,10 @@ function mayorQueDiez(n) {
 
 const noEsMayorQueDiez = negar(mayorQueDiez)
 
-console.log(mayorQueDiez(10))
-console.log(noEsMayorQueDiez(4))
-console.log(mayorQueDiez(5))
-console.log(noEsMayorQueDiez(21))
+// console.log(mayorQueDiez(10))
+// console.log(noEsMayorQueDiez(4))
+// console.log(mayorQueDiez(5))
+// console.log(noEsMayorQueDiez(21))
 
 
 // Ejercicio 3 (Funciones de orden superior) - Crea una función llamada ejecutarConRetraso que reciba una función fn y un 
@@ -70,7 +70,7 @@ function suma(n, n2){
 
 const ejecutar = ejecutarConRetraso(() => console.log(suma(10, 10)), 2000)
 
-console.log(ejecutar())
+// console.log(ejecutar())
 
 // Ejercicio 4 (Clases)
 /* 
@@ -97,19 +97,32 @@ class Tiempo {
         return this.horas * 3600 + this.minutos * 60 + this.segundos
     }
 
-
     tiemposDesdeSegundos(segundos) {
-        return this.horas, this.minutos, this.segundos
+        let hr = Math.trunc(segundos/3600) // 2
+        let min = Math.trunc((segundos - (hr * 3600)) / 60) // 46
+        let seg = segundos - (min * 60) - (hr * 3600) // 40
+
+        return `${hr}:${min}:${seg}`
     }
 
-    mayorDuracion(horas, minutos){
-        
+    mayorDuracion(tiempo1, tiempo2){
+        if(tiempo1.tiempoASegundos() > tiempo2.tiempoASegundos()){
+            return tiempo1
+        } else {
+            return tiempo2
+        }
     }
 
     info(){
         return `${this.horas}:${this.minutos}:${this.segundos}`
     }
 }
+
+// const tiempo1 = new Tiempo(1, 50, 40)
+// const tiempo2 = new Tiempo(1, 55, 20)
+
+
+
 
 // Ejercicio 5 (Clases)
 /* 
@@ -126,22 +139,22 @@ class Tiempo {
 
 class Cronometro {
     constructor(tiempoInicial, tiempoFinal){
-        this.tiempoInicial = tiempoInicial
-        this.tiempoFinal = tiempoFinal
-    }
-
-    comenzar(){
-
-    }
-
-    finalizar(){
-
+        this.comenzar = tiempoInicial
+        this.finalizar = tiempoFinal
     }
 
     tiempoEmpleado(){
-        
+        return new Tiempo(0,0,0).tiemposDesdeSegundos(this.finalizar.tiempoASegundos() - this.comenzar.tiempoASegundos())
+    }
+
+    info(){
+        return `${this.comenzar} - ${this.finalizar}`
     }
 }
+
+const crono = new Cronometro(new Tiempo(1,0,0), new Tiempo(2,40,0))
+
+// console.log(crono.tiempoEmpleado())
 
 // Ejercicio 6 (Clases)
 /* 
@@ -205,3 +218,5 @@ class Cuadrado {
 }
 
 const cuadrado = new Cuadrado(2)
+
+
