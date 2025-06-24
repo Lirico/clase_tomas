@@ -72,8 +72,3 @@ sala2d.ocuparAsiento(10, 4, 33756282, 17)
 sala2d.ocuparAsiento(13, 7, 33756282, 17)
 
 console.log(sala2d);
-
-// lista -> puede empezar vacio, se le pueden ir agregando elementos.
-
-// arreglo -> Arranca con un tamanio, no puede ser modificado el tamanio, los datos internos deben ser del
-// mismo tipo
