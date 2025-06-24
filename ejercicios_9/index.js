@@ -17,3 +17,28 @@
     butacas para la próxima función.
 
 */
+
+class SalaDeCine {
+    constructor(numero, tipo, cantFilas, cantAsientos){
+        this.numero = numero
+        this.tipo = tipo
+        this.cantFilas = cantFilas
+        this.cantAsientos = cantAsientos
+    }
+
+    ocuparAsiento(fila, columna, dni, edad){
+        if(fila <)
+    }
+
+    asientosVaciosFila(fila){
+        if(fila )
+    }
+
+    gananciaTotal(){
+
+    }
+
+    vaciarSala(){
+        
+    }
+}
