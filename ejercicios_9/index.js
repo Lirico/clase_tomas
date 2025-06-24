@@ -17,3 +17,63 @@
     butacas para la próxima función.
 
 */
+
+class Espectador {
+  constructor(dni, edad) {
+    this.dni = dni;
+    this.edad = edad;
+  }
+  edad() {
+    return this.edad;
+  }
+  info() {
+    return `Espectador: dni ${this.dni} - edad ${this.edad}`;
+  }
+}
+
+class SalaDeCine {
+  constructor(numero, tipo, cantFilas = 30, cantAsientos = 40) {
+    // Peasignacion de parametros -> 2015
+    this.numero = numero;
+    this.tipo = tipo;
+    this.cantFilas = cantFilas;
+    this.cantAsientos = cantAsientos;
+    this.sala = []
+  }
+
+  construirSala() {
+    for (let i = 0; i < this.cantFilas; i++) {
+      this.sala.push([]);
+      for (let j = 0; j < this.cantAsientos; j++) {
+        this.sala[i][j] = null;
+      }
+    }
+    return this.sala;
+  }
+
+  info() {
+    return `Sala nro ${this.numero} - ${this.tipo}`;
+  }
+
+  ocuparAsiento(fila, columna, dni, edad){
+      if (fila > this.sala[fila].length) {
+          return "La butaca seleccionada no existe."
+      }
+      this.sala[fila][columna] = new Espectador(dni, edad)
+  }
+}
+
+const sala2d = new SalaDeCine(2, "2D");
+const sala3d = new SalaDeCine(2, "3D");
+
+sala2d.construirSala()
+
+sala2d.ocuparAsiento(10, 4, 33756282, 17)
+sala2d.ocuparAsiento(13, 7, 33756282, 17)
+
+console.log(sala2d);
+
+// lista -> puede empezar vacio, se le pueden ir agregando elementos.
+
+// arreglo -> Arranca con un tamanio, no puede ser modificado el tamanio, los datos internos deben ser del
+// mismo tipo
