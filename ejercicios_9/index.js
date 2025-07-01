@@ -20,14 +20,14 @@
 
 class Espectador {
   constructor(dni, edad) {
-    this.dni = dni;
-    this.edad = edad;
+    this._dni = dni;
+    this._edad = edad;
   }
   edad() {
-    return this.edad;
+    return this._edad;
   }
   info() {
-    return `Espectador: dni ${this.dni} - edad ${this.edad}`;
+    return `Espectador: dni ${this._dni} - edad ${this._edad}`;
   }
 }
 
@@ -38,7 +38,7 @@ class SalaDeCine {
     this.tipo = tipo;
     this.cantFilas = cantFilas;
     this.cantAsientos = cantAsientos;
-    this.sala = []
+    this.sala = [];
   }
 
   construirSala() {
@@ -55,42 +55,74 @@ class SalaDeCine {
     return `Sala nro ${this.numero} - ${this.tipo}`;
   }
 
-  ocuparAsiento(fila, columna, dni, edad){
-      if (fila > this.sala[fila].length) {
-          return "La butaca seleccionada no existe."
-      }
-      this.sala[fila][columna] = new Espectador(dni, edad)
+  ocuparAsiento(fila, columna, dni, edad) {
+    if (fila > this.sala[fila].length) {
+      return "La butaca seleccionada no existe.";
+    }
+    this.sala[fila][columna] = new Espectador(dni, edad);
   }
 
   asientosVaciosFila(fila) {
-
     let butacasVacias = 0;
+
     for (let asiento of this.sala[fila]) {
       if (asiento === null) {
         butacasVacias++;
       }
     }
+    // this.sala[fila].forEach((asiento) => {
+    //   if (asiento === null) {
+    //     butacasVacias++;
+    //   }
+    // });
+
     return butacasVacias;
   }
 
-  gananciaTotal(){
-    let total = 0
-    if(edad < 14 ? 2500 : 4000){
+  gananciaTotal() {
+    let total = 0;
 
+    for (const fila of this.sala) {
+      for (const butaca of fila) {
+        if(butaca != null){
+          if (this.tipo == "2D") {
+            if (butaca.edad() < 14) {
+              total += 2500;
+            } else {
+              total += 4000;
+            }
+            if (this.tipo == "3D") {
+              if (butaca.edad() < 14) {
+                total += 4000;
+              } else {
+                total += 6000;
+              }
+            }
+          }
+        }
+      }
     }
+    return total
   }
 
   vaciarSala() {
-    
+    for (let i = 0; i < this.sala.length; i++) {
+      for (let j = 0; j < this.sala[i].length; j++) {
+        this.sala[i][j] = null;
+      }
+    }
   }
 }
 
 const sala2d = new SalaDeCine(2, "2D");
 const sala3d = new SalaDeCine(2, "3D");
 
-sala2d.construirSala()
+sala2d.construirSala();
 
-sala2d.ocuparAsiento(10, 4, 33756282, 17)
-sala2d.ocuparAsiento(13, 7, 33756282, 17)
+sala2d.ocuparAsiento(10, 4, 33756282, 13);
+sala2d.ocuparAsiento(13, 7, 33756282, 21);
+sala2d.ocuparAsiento(14, 8, 33756283, 22);
 
-console.log(sala2d);
+console.log(sala2d.gananciaTotal())
+
+
