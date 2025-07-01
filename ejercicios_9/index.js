@@ -61,6 +61,28 @@ class SalaDeCine {
       }
       this.sala[fila][columna] = new Espectador(dni, edad)
   }
+
+  asientosVaciosFila(fila) {
+
+    let butacasVacias = 0;
+    for (let asiento of this.sala[fila]) {
+      if (asiento === null) {
+        butacasVacias++;
+      }
+    }
+    return butacasVacias;
+  }
+
+  gananciaTotal(){
+    let total = 0
+    if(edad < 14 ? 2500 : 4000){
+
+    }
+  }
+
+  vaciarSala() {
+    
+  }
 }
 
 const sala2d = new SalaDeCine(2, "2D");
