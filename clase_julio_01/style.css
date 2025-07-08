@@ -1,0 +1,25 @@
+
+
+
+.cards {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 35px;
+}
+
+
+.card {
+    border: 2px solid black;
+    width: 250px;
+    color: white;
+    text-shadow: 2px 1.5px 2px black;
+
+    & img {
+        width: 250px;
+    }
+    & h3, p {
+        text-align: center;
+    }
+}
